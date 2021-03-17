@@ -1,3 +1,7 @@
 #+TITLE: Rental Property Tool
 
 Collection of utilities to analyze and recommend properties in Cambodia.
+
+* TODO
+- A property has more score if the property has more waypoints or closer to waypoints.
+- Waypoints are schools, work places, restaurants, transits etc...

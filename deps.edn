@@ -1,0 +1,12 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"}
+        metosin/malli {:mvn/version "0.3.0"}
+        aleph/aleph {:mvn/version "0.4.6"}
+        yada/yada {:mvn/version "1.2.15"}
+        metosin/jsonista {:mvn/version "0.3.1"}}
+ :aliases {:test {:extra-paths ["test"]
+                  :extra-deps {lambdaisland/kaocha {:mvn/version "RELEASE"}
+                               org.clojure/test.check {:mvn/version "RELEASE"}
+                               com.gfredericks/test.chuck {:mvn/version "RELEASE"}}}
+           :kaocha {:extra-deps {lambdaisland/kaocha {:mvn/version "RELEASE"}}
+                    :main-opts ["-m" "kaocha.runner"]}}}
