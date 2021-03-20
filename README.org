@@ -2,6 +2,59 @@
 
 Collection of utilities to analyze and recommend properties in Cambodia.
 
-* TODO
-- A property has more score if the property has more waypoints or closer to waypoints.
-- Waypoints are schools, work places, restaurants, transits etc...
+* Design Document
+** https://medium.com/@appaloosastore/string-similarity-algorithms-compared-3f7b4d12f0ff
+*** The Levenshtein distance is the minimum number of single-character edits required to change one word into the other, so the result is a positive integer, sensitive to string length.
+**** Which make it more difficult to draw pattern.
+**** So from the Levenshtein algorithm point of view "Chien"/"Niche" are more similar than "ShazamIphone"/"ShazamAndroid" because fewer edits are needed to get from "chien" to "niche", than to get from "ShazamIphone" to "ShazamAndroid".
+*** The limit of the Trigram method to compare strings is that short strings with one (or two..) different trigrams tend to produce a lower similarity than long ones.
+*** Giving "more importance" to words with identical prefixes made the Jaro-Winkler distance seem very interesting for our use case.
+** http://www.catalysoft.com/articles/StrikeAMatch.html
+*** My algorithm rates the strings 'FRANCE' and 'REPUBLIC OF FRANCE' to have a good similarity of 56%.
+*** On the other hand, the strings 'FRANCE' and 'QUEBEC' are seen to be reassuringly dissimilar, with a similarity of 0%.
+*** 'FRENCH REPUBLIC' is more similar to 'REPUBLIC OF FRANCE' than it is to 'REPUBLIC OF CUBA' with similarities of 72% and 61%, respectively.
+*** A reader of this article has pointed out that the algorithm I describe is the same as Dice's Coefficient, which I was not aware of at the time I rediscovered the algorithm or at the time that I wrote this article.
+** http://www.catalysoft.com/articles/MatchingSimilarStrings.html?article=Tame_the_Beast_by_Matching_Similar_Strings_14
+*** I do not recommend the Hamming distance for the majority of string-based information retrieval tasks.
+** Comparing string similarity algorithms
+We tested several algorithms to compare strings, and selected the one that would better fit our need. Jaro-Winkler seems to fit our need the most.
+| Word A              | Word B                   | Dice | Jaro-Winkler | Levenshtein | Cosine | Jaccard |
+|---------------------+--------------------------+------+--------------+-------------+--------+---------|
+| ""                  | ""                       |  1.0 |          1.0 |         1.0 |    1.0 |     1.0 |
+| "foo"               | "foo"                    |  1.0 |          1.0 |         1.0 |    1.0 |     1.0 |
+| "foo"               | "bar"                    |  0.0 |          0.0 |         0.0 |    0.0 |     0.0 |
+| "foo"               | "FOO"                    |  0.0 |          0.0 |         0.0 |    0.0 |     0.0 |
+| "beauties"          | "beautiful"              | 0.61 |         0.92 |        0.66 |   0.61 |    0.44 |
+| "ShazamIphone"      | "ShazamAndroid"          | 0.38 |         0.84 |        0.53 |   0.38 |    0.23 |
+| "chien"             | "niche"                  |  0.0 |         0.59 |        0.19 |    0.0 |     0.0 |
+| "martha"            | "marhta"                 | 0.25 |         0.96 |        0.66 |   0.25 |    0.14 |
+| "france"            | "republic of france"     |  0.4 |         0.44 |        0.33 |    0.5 |    0.25 |
+| "french republic"   | "republic of france"     | 0.41 |         0.66 |        0.16 |   0.41 |    0.26 |
+| "republic of cuba"  | "republic of france"     | 0.66 |         0.95 |        0.66 |   0.66 |     0.5 |
+| "france"            | "quebec"                 |  0.0 |         0.41 |        0.09 |    0.0 |     0.0 |
+| "Twitter (for iOS)" | "Twitter test"           | 0.48 |         0.84 |        0.47 |   0.48 |    0.31 |
+| "Twitter"           | "Appaloosa Store's Blog" |  0.0 |         0.41 |        0.09 |    0.0 |     0.0 |
+| "Twitter (for iOS)" | "Twitter (for Andriod)"  | 0.64 |         0.94 |        0.66 |   0.65 |    0.47 |
+| "Twitter test"      | "Twitter (for Andriod)"  | 0.41 |         0.68 |        0.38 |   0.43 |    0.26 |
+| "kindle"            | "Amazon Kindle"          | 0.53 |         0.41 |        0.46 |   0.60 |    0.36 |
+
+* Future Plan
+** A property has more score if the property has more waypoints or closer to waypoints.
+Waypoints are schools, work places, restaurants, transits etc...
+** implement view endpoint
+** implement suggest endpoint
+** implement preview endpoint
+** implement flyout endpoint
+** implement match all columns
+
+* WIP Scratch Notes
+** DONE log request when no endpoints matched
+** TODO implement reconcile against no particular data type
+** DONE reconcile against the first column by default
+** TODO remove debug-requests
+** DONE setup base infrastructure code
+** TODO use ngram for search
+** TODO check how to remove low score result
+** TODO remove comments from csv
+** TODO write tests
+** TODO use log instead of println
