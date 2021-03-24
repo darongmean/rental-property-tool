@@ -2,6 +2,13 @@
 
 Collection of utilities to analyze and recommend properties in Cambodia.
 
+* How to start Openrefine Reconcile Service
+Start the service at port 3000 by the following command:
+
+#+begin_src shell
+ clj -X darongmean.property.openrefine/run :csv sample.csv
+#+end_src
+
 * Design Document
 ** https://medium.com/@appaloosastore/string-similarity-algorithms-compared-3f7b4d12f0ff
 *** The Levenshtein distance is the minimum number of single-character edits required to change one word into the other, so the result is a positive integer, sensitive to string length.
@@ -55,6 +62,7 @@ Waypoints are schools, work places, restaurants, transits etc...
 ** DONE setup base infrastructure code
 ** TODO use ngram for search
 ** TODO check how to remove low score result
-** TODO remove comments from csv
+** DONE remove comments from csv
 ** TODO write tests
 ** TODO use log instead of println
+
