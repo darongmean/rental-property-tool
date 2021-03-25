@@ -9,6 +9,15 @@ Start the service at port 3000 by the following command:
  clj -X darongmean.property.openrefine/run :csv sample.csv
 #+end_src
 
+* How to update Geodata
+Update the latest data in =admin-region-cambodia= folder from https://github.com/dwilkie/pumi and run the following command:
+
+#+begin_src shell
+ clj -X darongmean.property.geodata/run
+#+end_src
+
+The file =geodata-cambodia.csv= will be updated.
+
 * Design Document
 ** https://medium.com/@appaloosastore/string-similarity-algorithms-compared-3f7b4d12f0ff
 *** The Levenshtein distance is the minimum number of single-character edits required to change one word into the other, so the result is a positive integer, sensitive to string length.
@@ -44,6 +53,8 @@ We tested several algorithms to compare strings, and selected the one that would
 | "Twitter (for iOS)" | "Twitter (for Andriod)"  | 0.64 |         0.94 |        0.66 |   0.65 |    0.47 |
 | "Twitter test"      | "Twitter (for Andriod)"  | 0.41 |         0.68 |        0.38 |   0.43 |    0.26 |
 | "kindle"            | "Amazon Kindle"          | 0.53 |         0.41 |        0.46 |   0.60 |    0.36 |
+
+** The Geodata of administrative regions in Cambodia is provided by https://github.com/dwilkie/pumi.
 
 * Future Plan
 ** A property has more score if the property has more waypoints or closer to waypoints.

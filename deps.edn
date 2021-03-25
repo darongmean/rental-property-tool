@@ -1,5 +1,6 @@
 {:paths ["src" "resources"]
  :deps {aleph/aleph {:mvn/version "0.4.6"}
+        clj-commons/clj-yaml {:mvn/version "0.7.0"}
         clojure-csv/clojure-csv {:mvn/version "2.0.1"}
         info.debatty/java-string-similarity {:mvn/version "RELEASE"}
         metosin/jsonista {:mvn/version "0.3.1"}
