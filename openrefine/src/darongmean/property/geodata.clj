@@ -42,13 +42,13 @@
 (defn run
   [_args]
   (try
-    (println "Reading data from admin-region-cambodia/ ...")
-    (-> {:provinces (read-region-name-by-code "admin-region-cambodia/provinces.yml")
-         :districts (read-region-name-by-code "admin-region-cambodia/districts.yml")
-         :communes (read-region-name-by-code "admin-region-cambodia/communes.yml")
-         :villages (read-region-name-by-code "admin-region-cambodia/villages.yml")}
+    (println "Reading data from openrefine/admin-region-cambodia/ ...")
+    (-> {:provinces (read-region-name-by-code "openrefine/admin-region-cambodia/provinces.yml")
+         :districts (read-region-name-by-code "openrefine/admin-region-cambodia/districts.yml")
+         :communes (read-region-name-by-code "openrefine/admin-region-cambodia/communes.yml")
+         :villages (read-region-name-by-code "openrefine/admin-region-cambodia/villages.yml")}
         (regions-table)
-        (write-csv "geodata-cambodia.csv"))
-    (println "Geodata was written to geodata_cambodia.csv")
+        (write-csv "openrefine/geodata-cambodia.csv"))
+    (println "Geodata was written to openrefine/geodata_cambodia.csv")
     (catch Exception ex
       (println ex))))

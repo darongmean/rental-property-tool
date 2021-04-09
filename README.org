@@ -6,17 +6,17 @@ Collection of utilities to analyze and recommend properties in Cambodia.
 Start the service at port 3000 by the following command:
 
 #+begin_src shell
- clj -X darongmean.property.openrefine/run :csv sample.csv
+ clojure -A:openrefine -X darongmean.property.openrefine/run :csv openrefine/geodata-cambodia.csv
 #+end_src
 
 * How to update Geodata
-Update the latest data in =admin-region-cambodia= folder from https://github.com/dwilkie/pumi and run the following command:
+Update the latest data in =openrefine/admin-region-cambodia= folder from https://github.com/dwilkie/pumi and run the following command:
 
 #+begin_src shell
- clj -X darongmean.property.geodata/run
+ clojure -A:openrefine -X darongmean.property.geodata/run
 #+end_src
 
-The file =geodata-cambodia.csv= will be updated.
+The file =openrefine/geodata-cambodia.csv= will be updated.
 
 * Design Document
 ** https://medium.com/@appaloosastore/string-similarity-algorithms-compared-3f7b4d12f0ff

@@ -1,15 +1,15 @@
-{:paths ["src" "resources"]
- :deps {aleph/aleph {:mvn/version "0.4.6"}
-        clj-commons/clj-yaml {:mvn/version "0.7.0"}
-        clojure-csv/clojure-csv {:mvn/version "2.0.1"}
-        info.debatty/java-string-similarity {:mvn/version "RELEASE"}
-        metosin/jsonista {:mvn/version "0.3.1"}
+{:deps {com.gfredericks/test.chuck {:mvn/version "RELEASE"}
         metosin/malli {:mvn/version "0.3.0"}
-        metosin/reitit {:mvn/version "0.5.12"}
-        org.clojure/clojure {:mvn/version "1.10.3"}}
- :aliases {:test {:extra-paths ["test"]
-                  :extra-deps {lambdaisland/kaocha {:mvn/version "RELEASE"}
-                               org.clojure/test.check {:mvn/version "RELEASE"}
-                               com.gfredericks/test.chuck {:mvn/version "RELEASE"}}}
+        org.clojure/clojure {:mvn/version "1.10.3"}
+        org.clojure/test.check {:mvn/version "RELEASE"}}
+ :aliases {:openrefine {:extra-paths ["openrefine/src"]
+                        :extra-deps {aleph/aleph {:mvn/version "0.4.6"}
+                                     clj-commons/clj-yaml {:mvn/version "0.7.0"}
+                                     clojure-csv/clojure-csv {:mvn/version "2.0.1"}
+                                     info.debatty/java-string-similarity {:mvn/version "2.0.0"}
+                                     metosin/jsonista {:mvn/version "0.3.1"}
+                                     metosin/reitit {:mvn/version "0.5.12"}}}
+           :openrefine-test {:extra-paths ["openrefine/test"]}
+           :dev {:extra-deps {lambdaisland/kaocha {:mvn/version "RELEASE"}}}
            :kaocha {:extra-deps {lambdaisland/kaocha {:mvn/version "RELEASE"}}
                     :main-opts ["-m" "kaocha.runner"]}}}
